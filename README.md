@@ -27,6 +27,9 @@
 
 ## Wichiger Hinweis:
 * In der environment.ts-Datei muss die apiBaseUrl auf die URL geändert werden, die vom JSON-Server verwendet wird (nicht localhost:3000).
+  ```bash
+  https://super-palm-tree-699gx5gq76gqhw5p-3000.app.github.dev
+* Vorsicht der letzte Backslash muss weg
 * Für jeden Codespace wird eine eigene URL generiert, die du nach dem Starten des Servers unter Ports findest.
 * Stelle sicher, dass der API-Server auf Public gesetzt wird, damit er auch von außerhalb des Codespaces erreichbar ist.
 
