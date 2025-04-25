@@ -31,10 +31,17 @@ export class ShoppingListComponent {
     });
   }
 
-  deleteItem(item: number){
-    console.log("Try to delete Item:", item);
-    this.itemService.deleteItem(item);
-  }
+  deleteItem(id: number) {
+    this.itemService.deleteItem(id).subscribe({
+      next: () => {
+        this.items = this.items.filter(item => item.id !== id);
+      },
+      error: (err) => {
+        this.error = 'Fehler beim Löschen!';
+        console.error(err);
+      }
+    });
+  }  
 
   createItem(item: Item){
     console.log("Try to Create Item");
