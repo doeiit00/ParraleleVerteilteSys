@@ -4,8 +4,6 @@ Angular
 1. In jedem neuen Codespace npm install -g @angular/cli und npm i
 2. Um den Serve zu starten ng serve
 
-Im Anschluss npm install
-
 Mock API Server (JSON)
 1. In jedem neuen Codespace npm install -g json-server
 2. Um den Server dann zu starten json-server --watch db.json --port 3000
