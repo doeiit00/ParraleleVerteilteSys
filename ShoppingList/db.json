@@ -1,0 +1,6 @@
+{
+    "items": [
+      { "id": 1, "name": "Apples", "quantity": 3 },
+      { "id": 2, "name": "Bananas", "quantity": 5 }
+    ]
+  }

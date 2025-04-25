@@ -1,3 +1,13 @@
 <div class="title">
  <h1>Shopping List</h1>
 </div><hr>
+
+@if (error) {
+    <p style="color: red">{{ error }}</p>
+} @else {
+    <ul>
+      @for (item of items; track item.id) {
+        <li>{{ item.name }} – {{ item.quantity }}</li>
+      }
+    </ul>
+}

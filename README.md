@@ -1,29 +1,16 @@
 # ParraleleVerteilteSys
 
-12-Factor Anwendung – Frontend-relevant
+Angular
+1. In jedem neuen Codespace npm install -g @angular/cli und npm i
+2. Um den Serve zu starten ng serve
 
-    Codebase – 1 Codebase pro App, Git
+Im Anschluss npm install
 
-    Dependencies – alles in package.json
+Mock API Server (JSON)
+1. In jedem neuen Codespace npm install -g json-server
+2. Um den Server dann zu starten json-server --watch db.json --port 3000
 
-    Config – siehe environment.ts + .env + Docker
+Wichiger Hinweis:
+In der Enviroment.ts muss die apiBaseUrl geändert werden auf die, welche der JSON Server verwendet (was nicht localhost:3000 ist). Für jedes Cospace ist das eine andere URL!!
 
-    Backing services – externe APIs (wie dein Backend)
-
-    Build, release, run – Trennung via Dockerfile
-
-    Processes – stateless, keine Speicherung im Client
-
-    Port binding – Angular läuft auf extern konfigurierbarem Port
-
-    Concurrency – handled durch den Webserver, nicht durch Angular selbst
-
-    Disposability – schnell startender/stoppender Container
-
-    Dev/prod parity – docker-compose hilft hier
-
-    Logs – Angular loggt über console, zentral erfasst vom Hostsystem
-
-    Admin processes – z. B. Healthcheck-Seite oder Debug-Tools
-
-Diese Punkte kannst du dann kurz dokumentieren in einer README.md.
+Die Daten die die Mock API bekommt sind in der db.json file

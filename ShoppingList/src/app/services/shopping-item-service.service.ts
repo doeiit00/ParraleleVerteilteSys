@@ -1,37 +1,39 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-
 
 export interface Item {
   id: number;
   name: string;
   quantity: number;
+  checked: boolean;
 }
+
+const BASE_URL = `${environment.apiBaseUrl}/items`;
 
 @Injectable({ providedIn: 'root' })
 export class ShoppingItemService {
-  private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  getItems() {
-    return this.http.get<Item[]>(`${this.baseUrl}/items`);
+  getItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(BASE_URL);
   }
 
-  getItem(id: number) {
-    return this.http.get<Item>(`${this.baseUrl}/items/${id}`);
+  createOrUpdateItem(item: Item): Observable<Item> {
+    return this.http.post<Item>(BASE_URL, item);
   }
 
-  createOrUpdateItem(item: Omit<Item, 'id'>) {
-    return this.http.post<Item>(`${this.baseUrl}/items`, item);
+  getItemById(id: number): Observable<Item> {
+    return this.http.get<Item>(`${BASE_URL}/${id}`);
   }
 
-  updateItem(id: number, item: Omit<Item, 'id'>) {
-    return this.http.put<Item>(`${this.baseUrl}/items/${id}`, item);
+  updateItem(id: number, item: Item): Observable<Item> {
+    return this.http.put<Item>(`${BASE_URL}/${id}`, item);
   }
 
-  deleteItem(id: number) {
-    return this.http.delete(`${this.baseUrl}/items/${id}`, { observe: 'response' });
+  deleteItem(id: number): Observable<void> {
+    return this.http.delete<void>(`${BASE_URL}/${id}`);
   }
 }
