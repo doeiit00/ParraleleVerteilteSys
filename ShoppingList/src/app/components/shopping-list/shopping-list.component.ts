@@ -30,4 +30,19 @@ export class ShoppingListComponent {
       }
     });
   }
+
+  deleteItem(item: number){
+    console.log("Try to delete Item:", item);
+    this.itemService.deleteItem(item);
+  }
+
+  createItem(item: Item){
+    console.log("Try to Create Item");
+    this.itemService.createOrUpdateItem(item);
+  }
+
+  updateItem(id: number, item: Item){
+    console.log("Try to update Item", item);
+    this.itemService.updateItem(id, item);
+  }
 }
