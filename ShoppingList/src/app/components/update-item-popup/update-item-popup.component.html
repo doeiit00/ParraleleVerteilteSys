@@ -1,16 +1,21 @@
-<div class="popup">
-    <h2>Item bearbeiten</h2>
-    <p>
-        <label>Name </label>
-        <input type="text">
-    </p>
-    <p>
-        <label>Quantity </label>
-        <input type="number">
-    </p>
+@if(item){
+   <div class="overlay">
+    <div class="popup">
+        <h2>Item bearbeiten</h2>
+        <p>
+            <label>Name </label>
+            <input type="text" [(ngModel)]="item.name">
+        </p>
+        <p>
+            <label>Quantity </label>
+            <input type="number" [(ngModel)]="item.quantity">
+        </p>
 
-    <div class="popup-btn">
-        <button>Speichern</button>
-        <button>Abbrechen</button>
-    </div>
-</div>
+        <div class="popup-btn">
+            <button (click)="saveItem()">Speichern</button>
+            <button type="button" (click)="closePopUp()">Abbrechen</button>
+        </div>
+    </div>    
+</div> 
+}
+
