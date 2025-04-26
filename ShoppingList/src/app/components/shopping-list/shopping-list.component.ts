@@ -30,4 +30,26 @@ export class ShoppingListComponent {
       }
     });
   }
+
+  deleteItem(id: number) {
+    this.itemService.deleteItem(id).subscribe({
+      next: () => {
+        this.items = this.items.filter(item => item.id !== id);
+      },
+      error: (err) => {
+        this.error = 'Fehler beim Löschen!';
+        console.error(err);
+      }
+    });
+  }  
+
+  createItem(item: Item){
+    console.log("Try to Create Item");
+    this.itemService.createOrUpdateItem(item);
+  }
+
+  updateItem(id: number, item: Item){
+    console.log("Try to update Item", item);
+    this.itemService.updateItem(id, item);
+  }
 }

@@ -34,6 +34,7 @@ export class ShoppingItemService {
   }
 
   deleteItem(id: number): Observable<void> {
+    console.log("Sending delete command")
     return this.http.delete<void>(`${BASE_URL}/${id}`);
   }
 }

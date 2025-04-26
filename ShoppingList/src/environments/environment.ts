@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiBaseUrl: 'https://laughing-guacamole-wr5947r76gx3vg5w-3000.app.github.dev'
+    apiBaseUrl: 'https://fluffy-rotary-phone-7vv9j5964xwr3rpr7-3000.app.github.dev'
   };
