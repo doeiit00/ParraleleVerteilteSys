@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShoppingItemService, Item } from '../../services/shopping-item-service.service';
 import { FormsModule } from '@angular/forms';
+import {AddItemPopupComponent} from '../add-item-popup/add-item-popup.component';
 
 
 @Component({
   selector: 'app-shopping-list',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AddItemPopupComponent],
   templateUrl: './shopping-list.component.html',
   styleUrl: './shopping-list.component.css'
 })
@@ -41,15 +42,16 @@ export class ShoppingListComponent {
         console.error(err);
       }
     });
-  }  
-
-  createItem(item: Item){
-    console.log("Try to Create Item");
-    this.itemService.createOrUpdateItem(item);
   }
 
-  updateItem(id: number, item: Item){
-    console.log("Try to update Item", item);
-    this.itemService.updateItem(id, item);
+
+  isPopupAddItemVisible = false;
+
+  showPopupAddItem() {
+    this.isPopupAddItemVisible = true;
+  }
+
+  hidePopupAddItem() {
+    this.isPopupAddItemVisible = false;
   }
 }
