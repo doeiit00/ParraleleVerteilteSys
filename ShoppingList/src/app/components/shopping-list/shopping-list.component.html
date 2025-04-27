@@ -1,0 +1,31 @@
+<div class="title">
+  <h1>Shopping List</h1>
+ </div>
+<button (click)="showPopupAddItem()" class="tooltip">
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#6361D9"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+</button>
+@if(isPopupAddItemVisible){<app-add-item-popup (close)="hidePopupAddItem()"/>}
+<hr>
+
+
+ @if (isUpdatePopUpVisible){
+  <app-update-item-popup
+    [item]="selectedItem"
+    (PopUpClosed)="isUpdatePopUpVisible = false"
+    (itemUpdated)="handleItemUpdate($event)">
+  </app-update-item-popup>
+ }
+
+ @if (error) {
+     <p style="color: red">{{ error }}</p>
+ } @else {
+     <ul>
+       @for (item of items; track item.id) {
+         <li>
+           <button type="button" (click)="openUpdatePopUp(item)">update</button>
+           {{ item.name }} – {{ item.quantity }}
+           <button (click)=deleteItem(item.id)>delete</button>
+         </li>
+       }
+     </ul>
+ }
