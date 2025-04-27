@@ -50,7 +50,7 @@ export class AddItemPopupComponent {
           this.errorMessage = 'Please enter a valid item name';
         }
         else {
-          this.createItem({ id: 0, name: this.text, quantity: 1, checked: false });
+          this.createItem({id: Math.max(0, ...items.map(item => +item.id)) + 1, name: this.text, quantity: 1, checked: false});
           this.closePopup();
         }
       },
