@@ -17,6 +17,7 @@ export class AddItemPopupComponent {
   text: string = '';
   items: Item[] = [];
   errorMessage: string = '';
+  quantity: number = 1;
 
   constructor() {
     this.loadList();
@@ -50,7 +51,7 @@ export class AddItemPopupComponent {
           this.errorMessage = 'Please enter a valid item name';
         }
         else {
-          this.createItem({id: Math.max(0, ...items.map(item => +item.id)) + 1, name: this.text, quantity: 1, checked: false});
+          this.createItem({id: Math.max(0, ...items.map(item => +item.id)) + 1, name: this.text, quantity: this.quantity, checked: false});
           this.closePopup();
         }
       },
