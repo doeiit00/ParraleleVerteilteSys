@@ -1,6 +1,7 @@
 import {Component, EventEmitter, inject, Output} from '@angular/core';
 import {Item, ShoppingItemService} from '../../services/shopping-item-service.service';
 import {FormsModule} from '@angular/forms';
+import {ShoppingListComponent} from '../shopping-list/shopping-list.component';
 
 @Component({
   selector: 'app-add-item-popup',
@@ -12,14 +13,16 @@ import {FormsModule} from '@angular/forms';
 })
 export class AddItemPopupComponent {
   private itemService = inject(ShoppingItemService);
+  private shoppingList = inject(ShoppingListComponent);
   text: string = '';
   items: Item[] = [];
+  errorMessage: string = '';
 
   constructor() {
-    this.loadItems();
+    this.loadList();
   }
 
-  loadItems() {
+  loadList() {
     this.itemService.getItems().subscribe({
       next: (data) => {
         this.items = data;
@@ -34,6 +37,7 @@ export class AddItemPopupComponent {
 
   closePopup() {
     this.close.emit();
+    this.errorMessage = '';
   }
 
   createOrUpdateItem() {
@@ -41,11 +45,14 @@ export class AddItemPopupComponent {
       next: (items) => {
         const existingItem = items.find((item) => item.name === this.text);
         if (existingItem) {
-          this.updateItem(existingItem.id, { ...existingItem, name: this.text });
-        } else {
-          this.createItem({ id: 0, name: this.text, quantity: 1, checked: false });
+          this.errorMessage = `Item "${this.text}" already exists`;
+        } else if (this.text.trim() === '') {
+          this.errorMessage = 'Please enter a valid item name';
         }
-        this.closePopup()
+        else {
+          this.createItem({ id: 0, name: this.text, quantity: 1, checked: false });
+          this.closePopup();
+        }
       },
       error: (err) => {
         console.error(err);
@@ -53,14 +60,16 @@ export class AddItemPopupComponent {
     });
   }
 
-  createItem(item: Item){
+  createItem(item: Item) {
     console.log("Try to Create Item");
-    this.itemService.createOrUpdateItem(item);
+    this.itemService.createItem(item).subscribe({
+      next: (response) => {
+        console.log("Item created successfully:", response);
+        this.shoppingList.loadItems(); // Reload items to reflect the new entry
+      },
+      error: (err) => {
+        console.error("Error creating item:", err);
+      }
+    });
   }
-
-  updateItem(id: number, item: Item){
-    console.log("Try to update Item", item);
-    this.itemService.updateItem(id, item);
-  }
-
 }

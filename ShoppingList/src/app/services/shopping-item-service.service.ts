@@ -21,7 +21,8 @@ export class ShoppingItemService {
     return this.http.get<Item[]>(BASE_URL);
   }
 
-  createOrUpdateItem(item: Item): Observable<Item> {
+  createItem(item: Item): Observable<Item> {
+    console.log("Sending Create Item");
     return this.http.post<Item>(BASE_URL, item);
   }
 
