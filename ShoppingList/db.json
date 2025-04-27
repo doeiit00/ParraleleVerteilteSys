@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "name": "Ananas",
+      "quantity": 8
+    },
+    {
+      "id": "2",
+      "name": "Bananas",
+      "quantity": 7
+    },
+    {
+      "id": "5",
+      "name": "Tomatos",
+      "quantity": 5
+    }
+  ]
+}

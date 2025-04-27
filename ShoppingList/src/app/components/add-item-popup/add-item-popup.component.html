@@ -1,0 +1,28 @@
+<div class="popup-overlay" (click)="closePopup()">
+  <div class="popup-content" (click)="$event.stopPropagation()">
+
+    <button (click)="closePopup()" class="button">
+      <span class="X"></span>
+      <span class="Y"></span>
+      <div class="close">Close</div>
+    </button>
+
+    <h1>Create a New Item</h1>
+
+    <form class="newChatBox" (ngSubmit)="createOrUpdateItem()">
+      <input placeholder="New Item" type="text" id="newChatInput" autocomplete="off" [(ngModel)]="text" name="text"/>
+      <input type="number" id="quantityInput" min="1" max="100" [(ngModel)]="quantity" name="quantity"/>
+      <button id="sendButton">
+      Send
+      </button>
+    </form>
+
+    <div class="error-message">
+      @if(errorMessage) {
+        {{ errorMessage }}
+      }
+    </div>
+
+  </div>
+
+</div>
