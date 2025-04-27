@@ -34,7 +34,7 @@ export class ShoppingListComponent {
     });
   }
 
-  deleteItem(id: number) {
+  deleteItem(id: string) {
     this.itemService.deleteItem(id).subscribe({
       next: () => {
         this.items = this.items.filter(item => item.id !== id);
@@ -56,25 +56,6 @@ export class ShoppingListComponent {
     this.isPopupAddItemVisible = false;
   }
 
-  createItem(item: Item){
-    console.log("Try to Create Item");
-    this.itemService.createOrUpdateItem(item);
-  }
-
-  updateItem(id: number, item: Item): void {
-    console.log('Versuche, das Item zu aktualisieren', item);
-
-    this.itemService.updateItem(id, item).subscribe({
-      next: (updatedItem) => {
-        console.log('Item erfolgreich aktualisiert:', updatedItem);
-        this.loadItems(); // Die Liste neu laden, um das aktualisierte Item anzuzeigen
-        this.isUpdatePopUpVisible = false;  // Popup schließen
-      },
-      error: (err) => {
-        console.error('Fehler beim Aktualisieren des Items:', err);
-      }
-    });
-  }
 
   handleItemUpdate(updatedItem: Item): void {
     this.itemService.updateItem(updatedItem.id, updatedItem).subscribe({

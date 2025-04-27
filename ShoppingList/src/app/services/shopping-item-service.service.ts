@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface Item {
-  id: number;
+  id: string;
   name: string;
   quantity: number;
   checked: boolean;
@@ -21,7 +21,7 @@ export class ShoppingItemService {
     return this.http.get<Item[]>(BASE_URL);
   }
 
-  createOrUpdateItem(item: Item): Observable<Item> {
+  createItem(item: Item): Observable<Item> {
     return this.http.post<Item>(BASE_URL, item);
   }
 
@@ -29,11 +29,11 @@ export class ShoppingItemService {
     return this.http.get<Item>(`${BASE_URL}/${id}`);
   }
 
-  updateItem(id: number, item: Item): Observable<Item> {
+  updateItem(id: string, item: Item): Observable<Item> {
     return this.http.put<Item>(`${BASE_URL}/${id}`, item);
   }
 
-  deleteItem(id: number): Observable<void> {
+  deleteItem(id: string): Observable<void> {
     console.log("Sending delete command")
     return this.http.delete<void>(`${BASE_URL}/${id}`);
   }
