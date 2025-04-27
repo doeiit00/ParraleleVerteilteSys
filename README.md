@@ -33,3 +33,11 @@
 ***
 
 **Die Daten die die Mock API bekommt sind in der db.json file**
+
+## Docker
+1. **Docker Image bauen**
+   ```bash
+   docker build -t shopping-list .
+2. Container starten
+  ```bash
+   docker run -d -p 8080:80 --name shopping-list-container shopping-list
