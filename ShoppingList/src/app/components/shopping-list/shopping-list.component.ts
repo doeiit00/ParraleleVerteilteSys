@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ShoppingItemService, Item } from '../../services/shopping-item-service.service';
 import { FormsModule } from '@angular/forms';
 import { UpdateItemPopupComponent } from '../update-item-popup/update-item-popup.component';
-import {AddItemPopupComponent} from '../add-item-popup/add-item-popup.component';
 
 
 @Component({
   selector: 'app-shopping-list',
-  imports: [CommonModule, FormsModule, UpdateItemPopupComponent, AddItemPopupComponent],
+  imports: [CommonModule, FormsModule, UpdateItemPopupComponent],
   templateUrl: './shopping-list.component.html',
   styleUrl: './shopping-list.component.css'
 })
@@ -44,21 +43,16 @@ export class ShoppingListComponent {
         console.error(err);
       }
     });
+  }  
+
+  createItem(item: Item){
+    console.log("Try to Create Item");
+    this.itemService.createOrUpdateItem(item);
   }
 
-
-  isPopupAddItemVisible = false;
-
-  showPopupAddItem() {
-    this.isPopupAddItemVisible = true;
-  }
-
-  hidePopupAddItem() {
-    this.isPopupAddItemVisible = false;
-  }
   updateItem(id: number, item: Item): void {
     console.log('Versuche, das Item zu aktualisieren', item);
-
+  
     this.itemService.updateItem(id, item).subscribe({
       next: (updatedItem) => {
         console.log('Item erfolgreich aktualisiert:', updatedItem);
