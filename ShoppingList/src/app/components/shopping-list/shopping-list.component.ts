@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ShoppingItemService, Item } from '../../services/shopping-item-service.service';
 import { FormsModule } from '@angular/forms';
 import {AddItemPopupComponent} from '../add-item-popup/add-item-popup.component';
+import { UpdateItemPopupComponent } from '../update-item-popup/update-item-popup.component';
 
 
 @Component({
   selector: 'app-shopping-list',
-  imports: [CommonModule, FormsModule, AddItemPopupComponent],
+  imports: [CommonModule, FormsModule, AddItemPopupComponent, UpdateItemPopupComponent],
   templateUrl: './shopping-list.component.html',
   styleUrl: './shopping-list.component.css'
 })
@@ -15,6 +16,7 @@ export class ShoppingListComponent {
   private itemService = inject(ShoppingItemService);
   items: Item[] = [];
   error: string | null = null;
+  selectedItem: Item | undefined;
 
   constructor() {
     this.loadItems();
@@ -44,7 +46,6 @@ export class ShoppingListComponent {
     });
   }
 
-
   isPopupAddItemVisible = false;
 
   showPopupAddItem() {
@@ -53,5 +54,45 @@ export class ShoppingListComponent {
 
   hidePopupAddItem() {
     this.isPopupAddItemVisible = false;
+  }
+
+  createItem(item: Item){
+    console.log("Try to Create Item");
+    this.itemService.createOrUpdateItem(item);
+  }
+
+  updateItem(id: number, item: Item): void {
+    console.log('Versuche, das Item zu aktualisieren', item);
+
+    this.itemService.updateItem(id, item).subscribe({
+      next: (updatedItem) => {
+        console.log('Item erfolgreich aktualisiert:', updatedItem);
+        this.loadItems(); // Die Liste neu laden, um das aktualisierte Item anzuzeigen
+        this.isUpdatePopUpVisible = false;  // Popup schließen
+      },
+      error: (err) => {
+        console.error('Fehler beim Aktualisieren des Items:', err);
+      }
+    });
+  }
+
+  handleItemUpdate(updatedItem: Item): void {
+    this.itemService.updateItem(updatedItem.id, updatedItem).subscribe({
+      next: (item) => {
+        console.log('Item erfolgreich aktualisiert:', item);
+        this.loadItems(); // Liste neu laden
+        this.isUpdatePopUpVisible = false; // Popup schließen
+      },
+      error: (error) => {
+        console.error('Fehler beim Aktualisieren:', error);
+      }
+    });
+  }
+
+  isUpdatePopUpVisible: boolean = false;
+
+  openUpdatePopUp(item: Item): void {
+    this.selectedItem = { ...item };
+    this.isUpdatePopUpVisible = true;
   }
 }

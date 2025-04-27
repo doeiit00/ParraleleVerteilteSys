@@ -1,4 +1,29 @@
 {
   "items": [
+    {
+      "id": "1",
+      "name": "Ananas",
+      "quantity": 1
+    },
+    {
+      "id": "2",
+      "name": "Bananas",
+      "quantity": 5
+    },
+    {
+      "id": "3",
+      "name": "Milk",
+      "quantity": 3
+    },
+    {
+      "id": "4",
+      "name": "Chips",
+      "quantity": 2
+    },
+    {
+      "id": "5",
+      "name": "Tomatos",
+      "quantity": 4
+    }
   ]
 }
