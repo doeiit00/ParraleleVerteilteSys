@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiBaseUrl: 'http://localhost:3000'
+    apiBaseUrl: 'https://stunning-xylophone-v66vjrv9795q2645-3000.app.github.dev'
   };

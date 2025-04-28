@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - mockapi
+
+  mockapi:
+    image: clue/json-server
+    volumes:
+      - ./mockapi:/data
+    ports:
+      - "3000:80"
+    command: -H 0.0.0.0 /data/db.json
