@@ -37,7 +37,8 @@
 ## Docker
 1. **Docker Image bauen**
    ```bash
-   docker build -t shopping-list .
-2. Container starten
-  ```bash
-   docker run -d -p 8080:80 --name shopping-list-container shopping-list
+   docker-compose up --build
+2. **Ports öffnen**
+   Unter dem Tab Port den Port 3000 auf Öffentlich setzen.
+3. **apiBaseUrl ändern**
+   Unter Port findet man für die Mock-API (Port 3000) einen Link. Dieser muss in der Enviroment.ts unter apiBaseUrl eingefügt werden (das letzte / entfernen).
