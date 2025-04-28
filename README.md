@@ -39,6 +39,8 @@
    ```bash
    docker-compose up --build
 2. **Ports öffnen**
+
    Unter dem Tab Port den Port 3000 auf Öffentlich setzen.
-3. **apiBaseUrl ändern**
+4. **apiBaseUrl ändern**
+
    Unter Port findet man für die Mock-API (Port 3000) einen Link. Dieser muss in der Enviroment.ts unter apiBaseUrl eingefügt werden (das letzte / entfernen).
