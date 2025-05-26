@@ -1,2 +1,36 @@
-/.idea
+# IDEs
+.idea/
+.vscode/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.angular/cache/
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+
+# Build-Output
+dist/
+build/
+out/
+coverage/
+
+# Umgebungsvariablen
+.env
+.env.*
+
+# Sonstiges
+*.log
+*.tmp
+*.swp
+
+# Test-Output
+test-results/
+coverage//.idea
 /node_modules
