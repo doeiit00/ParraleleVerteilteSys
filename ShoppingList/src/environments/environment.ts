@@ -1,4 +1,10 @@
+function getApiBaseUrl(): string {
+  // Ersetze die Portnummer im Subdomain-Teil durch 3000
+  const host = window.location.host.replace(/-\d+\./, '-3000.');
+  return `https://${host}`;
+}
+
 export const environment = {
-    production: false,
-    apiBaseUrl: 'https://stunning-xylophone-v66vjrv9795q2645-3000.app.github.dev'
-  };
+  production: false,
+  apiBaseUrl: getApiBaseUrl()
+};
