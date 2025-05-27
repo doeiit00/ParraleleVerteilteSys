@@ -29,16 +29,16 @@
 
 ## Docker & Kubernetes Anleitung
 
-1. Images bauen und zu Docker Hub pushen
+### 1. Images bauen und zu Docker Hub pushen
 
-### Frontend
+#### Frontend
 
 ```bash
 docker build -t <dein-dockerhub-name>/frontend:latest .
 docker push <dein-dockerhub-name>/frontend:latest
 ```
 
-### Mock-API
+#### Mock-API
 
 ```bash
 cd mockapi
@@ -49,22 +49,25 @@ cd ..
 
 ***
 
-2. Kubernetes-Deployments anwenden
+### 2. Kubernetes-Deployments anwenden
 
-### 1. Passe die Image-Namen in den YAML-Dateien im `k8s/`-Ordner an:
-    - `frontend-deployment.yaml`
-    - `mockapi-deployment.yaml`
+#### 1. Starte Minikube (falls nicht bereits gestartet):
 
-### 2. Wende die Deployments und Services an:
-    ```bash
-    kubectl apply -f k8s/
-    ```
+```bash
+minikube start
+```
+
+#### 2. Wende die Deployments und Services an:
+
+```bash
+kubectl apply -f k8s/
+```
 
 ***
 
-3. Anwendungen erreichbar machen
+### 3. Anwendungen erreichbar machen
 
-### Port-Forwarding (z.B. in Codespaces oder lokal)
+#### Port-Forwarding (z.B. in Codespaces oder lokal)
 
 ```bash
 kubectl port-forward service/frontend-service 8080:80
