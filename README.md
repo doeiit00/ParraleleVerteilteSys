@@ -25,22 +25,62 @@
 
 ***
 
-## Wichiger Hinweis:
-* In der environment.ts-Datei muss die apiBaseUrl auf die URL geändert werden, die vom JSON-Server verwendet wird (nicht localhost:3000).
-* Für jeden Codespace wird eine eigene URL generiert, die du nach dem Starten des Servers unter Ports findest.
-* Stelle sicher, dass der API-Server auf Public gesetzt wird, damit er auch von außerhalb des Codespaces erreichbar ist.
+**Die Daten die die Mock API bekommt sind in der db.json file**
+
+## Docker & Kubernetes Anleitung
+
+### 1. Images bauen und zu Docker Hub pushen
+
+#### Frontend
+
+```bash
+docker build -t <dein-dockerhub-name>/frontend:latest .
+docker push <dein-dockerhub-name>/frontend:latest
+```
+
+#### Mock-API
+
+```bash
+cd mockapi
+docker build -t <dein-dockerhub-name>/mockapi:latest .
+docker push <dein-dockerhub-name>/mockapi:latest
+cd ..
+```
 
 ***
 
-**Die Daten die die Mock API bekommt sind in der db.json file**
+### 2. Kubernetes-Deployments anwenden
 
-## Docker
-1. **Docker Image bauen**
-   ```bash
-   docker-compose up --build
-2. **Ports öffnen**
+#### 1. Starte Minikube (falls nicht bereits gestartet):
 
-   Unter dem Tab Port den Port 3000 auf Öffentlich setzen.
-4. **apiBaseUrl ändern**
+```bash
+minikube start
+```
 
-   Unter Port findet man für die Mock-API (Port 3000) einen Link. Dieser muss in der Enviroment.ts unter apiBaseUrl eingefügt werden (das letzte "/" entfernen).
+#### 2. Wende die Deployments und Services an:
+
+```bash
+kubectl apply -f k8s/
+```
+
+***
+
+### 3. Anwendungen erreichbar machen
+
+#### Port-Forwarding (z.B. in Codespaces oder lokal)
+
+```bash
+kubectl port-forward service/frontend-service 8080:80
+kubectl port-forward service/mockapi-service 3000:80
+```
+
+- **Frontend:** http://localhost:8080
+- **Mock-API:** http://localhost:3000/items
+
+***
+
+## Hinweise
+
+- Nach Änderungen an `db.json` oder dem Frontend immer das jeweilige Image neu bauen und pushen!
+- Die Mock-API liefert die Daten aus `mockapi/db.json` unter `/items` aus.
+- Die Images müssen öffentlich auf Docker Hub liegen, damit Kubernetes sie ziehen kann.

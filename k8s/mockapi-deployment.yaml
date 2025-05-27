@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mockapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mockapi
+  template:
+    metadata:
+      labels:
+        app: mockapi
+    spec:
+      containers:
+      - name: mockapi
+        image: tamoit/mockapi:latest
+        args: ["-H", "0.0.0.0", "/data/db.json"]
+        ports:
+        - containerPort: 80
